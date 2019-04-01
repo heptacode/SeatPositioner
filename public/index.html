@@ -16,6 +16,7 @@
       rel="stylesheet"
       href="https://unpkg.com/vuetify/dist/vuetify.min.css"
     />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap-grid.min.css">
     <style>
       html {
         height: 100%;
@@ -23,11 +24,6 @@
       body {
         background: #fafafa;
         word-break: keep-all;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        cursor: default;
       }
       .body,
       .application,
@@ -38,13 +34,74 @@
       .title {
         font-family: "Nanum Square", sans-serif;
       }
+      .row div {
+        font-size: 35px;
+      }
     </style>
-    <!-- <script src="assets/disable.js"></script> -->
+    <script src="assets/disable.js"></script>
   </head>
   <body>
     <main>
       <v-app>
-        <div v-html="docs"></div>
+        <v-layout align-start justify-center>
+          <v-flex xs3><v-btn @click="locate" v-text="'배치'"></v-btn></v-flex>
+          <v-flex xs3><v-btn @click="space" v-text="'빈칸'"></v-btn></v-flex>
+          <v-flex xs3><v-btn :disabled="loading" :loading="loading" @click="loader = 'loading', undo()" v-text="'되돌리기'"></v-btn></v-flex>
+          <v-flex xs3><v-select v-model="cols" :items="[3, 4, 5, 6]" label="열 수"></v-select></v-flex>
+        </v-layout>
+        <v-layout class="row" fill-height>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[0]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[1]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[2]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[3]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[4]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[5]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[6]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[7]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[8]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[9]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[10]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[11]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[12]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[13]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[14]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[15]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[16]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[17]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[18]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[19]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[20]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[21]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[22]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[23]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[24]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[25]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[26]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[27]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[28]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[29]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[30]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[31]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[32]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[33]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[34]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[35]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[36]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[37]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[38]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[39]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[40]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[41]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[42]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[43]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[44]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[45]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[46]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[47]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[48]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="docs.성명[hist[49]]"></div>
+          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="docs.성명[hist[50]]"></div>
+        </v-layout>
       </v-app>
     </main>
     <noscript>
@@ -76,7 +133,7 @@
         storageBucket: "seat-positioner.appspot.com"
       });
       firebase.auth().signInAnonymously();
-      var dbRef = firebase.firestore().collection("좌석배치기"),
+      var docRef = firebase.firestore().collection("좌석배치기").doc(prompt("문서명을 입력하세요.")),
         v = new Vue({
           el: "v-app",
           data: () => ({
@@ -84,16 +141,34 @@
             dialogMsg: null,
             loader: null,
             loading: false,
-            docs: []
+            docs: [],
+            hist: [],
+            i: 0,
+            n: 0,
+            cnt: 0,
+            cols: 5
           }),
 
           watch: {
             loader() {
               const l = this.loader;
               this[l] = !this[l];
-              setTimeout(() => (this[l] = false), 2000);
+              setTimeout(() => (this[l] = false), 700);
               this.loader = null;
             }
+          },
+
+          created: function() {
+            docRef.get().then(function(doc) {
+                if (doc.exists) {
+                    v.docs = doc.data();
+                    v.i = doc.data().성명.length;
+                } else {
+                    alert("문서가 없습니다!");
+                }
+              }).catch(function(error) {
+                  console.log("문서 가져오기 실패:", error);
+              });
           },
 
           methods: {
@@ -102,17 +177,26 @@
               this.dialogMsg = msg;
               this.redirect = redirect;
             },
-            fetch() {
-              db.get()
-                .then(function(querySnapshot) {
-                  querySnapshot.forEach(function(doc) {
-                    console.log(doc.data());
-                    v.docs.push(doc.data());
-                  });
-                })
-                .catch(function(error) {
-                  console.log("문서 가져오기 실패: ", error);
-                });
+            locate() {
+              while(1){
+                if(this.cnt >= this.i){
+                  break;
+                }
+                this.n = Math.floor(Math.random() * this.i);
+                if(v.hist.indexOf(this.n) == -1){
+                  v.hist.push(this.n);
+                  this.cnt++;
+                  return 0;
+                }
+              }
+            },
+            space(){
+              v.hist.push(null);
+            },
+            undo(){
+              if(v.hist[v.hist.length - 1] !== null)
+                v.cnt--;
+              v.hist.pop();
             }
           }
         });
