@@ -8,9 +8,25 @@
     <title>SeatPositioner</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/font-nanumsquare/1.0.0/nanumsquare.css?ver=4.9.8" />
-    <script src="/__/firebase/6.5.0/firebase-app.js"></script>
+    <!-- <script src="/__/firebase/6.5.0/firebase-app.js"></script>
     <script src="/__/firebase/6.5.0/firebase-firestore.js"></script>
-    <script src="/__/firebase/init.js"></script>
+    <script src="/__/firebase/init.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-firestore.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCJRMJB6jFeCKRFicXJsnLhVh_Y6oJuCu0",
+        authDomain: "seat-positioner.firebaseapp.com",
+        databaseURL: "https://seat-positioner.firebaseio.com",
+        projectId: "seat-positioner",
+        storageBucket: "seat-positioner.appspot.com",
+        messagingSenderId: "1043610958404",
+        appId: "1:1043610958404:web:37b0b16bd21af92f"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
   </head>
   <body>
     <noscript>

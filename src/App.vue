@@ -3,14 +3,21 @@
     <v-container>
       <v-layout align-start justify-center>
         <v-flex xs3><v-btn @click="locate">배치</v-btn></v-flex>
-        <v-flex xs3><v-btn @click="space">빈칸</v-btn></v-flex>
-        <v-flex xs3>
+        <v-flex xs2>
+          <v-btn icon color="blue" @click="space">
+            <v-icon>mdi-keyboard-space</v-icon>
+          </v-btn>
+        </v-flex>
+        <v-flex xs2>
           <v-btn
+            icon
+            color="blue"
             :disabled="loading"
             :loading="loading"
             @click="(loader = 'loading'), undo()"
-            >되돌리기</v-btn
           >
+            <v-icon>mdi-undo</v-icon>
+          </v-btn>
         </v-flex>
         <v-flex xs3>
           <v-select
@@ -28,56 +35,15 @@
         </v-flex>
       </v-layout>
       <v-layout class="row" fill-height>
-        <!-- <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(1)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(2)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(3)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(4)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(5)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(6)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(7)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(8)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(9)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(10)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(11)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(12)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(13)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(14)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(15)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(16)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(17)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(18)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(19)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(20)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(21)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(22)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(23)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(24)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(25)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(26)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(27)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(28)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(29)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(30)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(31)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(32)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(33)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(34)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(35)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(36)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(37)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(38)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(39)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(40)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(41)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(42)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(43)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(44)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(45)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(46)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(47)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(48)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-2' : 'col-2'))" v-text="str(49)"></div>
-          <div :class="cols == 3 ? 'col-4' : (cols == 4 ? 'col-3' : (cols == 5 ? 'col-3' : 'col-2'))" v-text="str(50)"></div> -->
+        <v-flex
+          v-for="k of i"
+          :key="k"
+          :xs6="cols == 2"
+          :xs4="cols == 3"
+          :xs3="cols == 4"
+          :xs2="cols == 5"
+          v-text="str(k)"
+        ></v-flex>
       </v-layout>
     </v-container>
   </v-app>
@@ -85,32 +51,31 @@
 
 <script>
 export default {
-  data: () => ({
-    loader: null,
-    loading: false,
-    num: "없음",
-    docs: [],
-    hist: [null],
-    i: 0,
-    n: 0,
-    cnt: 0,
-    cols: 5
-  }),
-  mounted: function() {
-    // eslint-disable-next-line
-    let docs = this.docs;
-    // eslint-disable-next-line
-    let i = this.i;
+  data() {
+    return {
+      loader: null,
+      loading: false,
+      num: "없음",
+      docs: [],
+      hist: [null],
+      i: 0,
+      k: 0,
+      n: 0,
+      cnt: 0,
+      cols: 5
+    };
+  },
+  mounted() {
     // eslint-disable-next-line
     firebase
       .firestore()
       .collection("좌석배치기")
       .doc("18-204")
       .get()
-      .then(function(doc) {
+      .then(doc => {
         if (doc.exists) {
-          docs = doc.data();
-          i = doc.data().names.length - 1;
+          this.docs = doc.data();
+          this.i = doc.data().names.length - 1;
         } else {
           location.replace("/");
           alert("문서가 없습니다!");
@@ -130,6 +95,9 @@ export default {
   },
   methods: {
     str(n) {
+      console.log("i", this.i)
+      console.log("hist", this.hist)
+      // 번호 포맷
       if (this.hist[n]) {
         if (this.num == "ASC") {
           return (n < 10 ? "0" + n : n) + " " + this.docs.names[this.hist[n]];
