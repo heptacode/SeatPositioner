@@ -22,7 +22,7 @@
         <v-flex xs3>
           <v-select
             v-model="cols"
-            :items="[3, 4, 5, 6]"
+            :items="[1, 2, 3, 4, 5, 6]"
             label="열 수"
           ></v-select>
         </v-flex>
@@ -34,16 +34,24 @@
           ></v-select>
         </v-flex>
       </v-layout>
-      <v-layout class="row" fill-height>
-        <v-flex
-          v-for="k of i"
-          :key="k"
-          :xs6="cols == 2"
-          :xs4="cols == 3"
-          :xs3="cols == 4"
-          :xs2="cols == 5"
-          v-text="str(k)"
-        ></v-flex>
+      <v-layout fill-height>
+        <span v-for="k of i" :key="k">
+          <v-row v-if="cols == 1">
+            <v-col cols="12" v-text="str(k)"></v-col>
+          </v-row>
+          <!-- <span v-if="cols == 5 && k % 5 == 0">
+            <v-flex xs2 v-text="str(k)"></v-flex>
+          </span>
+          <span v-else>
+            <v-flex
+              :xs12="cols == 1"
+              :xs6="cols == 2"
+              :xs4="cols == 3"
+              :xs3="cols == 4 || cols == 5"
+              v-text="str(k)"
+            ></v-flex>
+          </span> -->
+        </span>
       </v-layout>
     </v-container>
   </v-app>
@@ -95,8 +103,8 @@ export default {
   },
   methods: {
     str(n) {
-      console.log("i", this.i)
-      console.log("hist", this.hist)
+      console.log("i", this.i);
+      console.log("hist", this.hist);
       // 번호 포맷
       if (this.hist[n]) {
         if (this.num == "ASC") {
